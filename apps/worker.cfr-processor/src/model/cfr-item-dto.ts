@@ -1,0 +1,10 @@
+interface CFRItemDto {
+  id: string;
+  parentId: string | null;
+  type: string;
+  name?: string;
+  attribs?: { [key: string]: string };
+  children?: CFRItemDto[] | null | undefined;
+  data?: string;
+  ignore: boolean;
+}

@@ -18,6 +18,39 @@
       "compilerOptions": {
         "tsConfigPath": "apps/api/tsconfig.app.json"
       }
+    },
+    "worker.cfr-processor": {
+      "type": "application",
+      "root": "apps/worker.cfr-processor",
+      "entryFile": "main",
+      "sourceRoot": "apps/worker.cfr-processor/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/worker.cfr-processor/tsconfig.app.json",
+        "assets": [
+          {
+            "include": "**/*.html",
+            "watchAssets": true
+          }
+        ]
+      }
+    },
+    "database": {
+      "type": "library",
+      "root": "libs/database",
+      "entryFile": "index",
+      "sourceRoot": "libs/database/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/database/tsconfig.lib.json"
+      }
+    },
+    "file-storage": {
+      "type": "library",
+      "root": "libs/file-storage",
+      "entryFile": "index",
+      "sourceRoot": "libs/file-storage/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/file-storage/tsconfig.lib.json"
+      }
     }
   }
 }
