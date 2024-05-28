@@ -19,15 +19,11 @@ export class CFRProcessService {
   public async process() {
     const html = await this.getHtml();
     const handler = new DomHandler(async (error, dom) => {
-      if (error) {
-        console.error('Error parsing HTML:', error);
-      } else {
-        const json = dom.map((d) => this.convertDomToJson(d, null)).filter((d) => !d.ignore);
-        console.log(JSON.stringify(json));
-        console.log('Done');
-        await this.writeToDatabase(json);
-        await this.saveFile(json);
-      }
+      if (error) console.error('Error parsing HTML:', error);
+      const json = dom.map((d) => this.convertDomToJson(d, null)).filter((d) => !d.ignore);
+      console.log('Done converting to JSON');
+      await this.writeToDatabase(json);
+      await this.saveFile(json);
     });
 
     const parser = new Parser(handler);
@@ -55,7 +51,8 @@ export class CFRProcessService {
 
   private async getHtml() {
     // TODO: Read html content using axios
-    const filePath = path.join(__dirname, '/data/test.html');
+    console.log('Fetching html');
+    const filePath = path.join(__dirname, '/data/title-49.html');
     console.log(filePath);
     return fs.readFile(filePath, 'utf8');
   }
