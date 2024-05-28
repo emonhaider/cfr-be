@@ -38,7 +38,7 @@ export class CFRProcessService {
   async writeToDatabase(json: CFRItem[]) {
     for (const item of json) {
       console.log('Setting up for database entry');
-      await this.databaseService.createItem({ ...item, children: null }, 'Title49');
+      await this.databaseService.createItem({ ...item, children: null });
       console.log('Sucessfully wrote to database');
       if (!item.children || item.children.length === 0) continue;
       console.log('Processing children');

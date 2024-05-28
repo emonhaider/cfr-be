@@ -11,20 +11,17 @@ export class DatabaseService {
     this.client = new DynamoDBClient({ region: configService.get('AWS_REGION') });
   }
 
-  public async createItem(item: CFRItem, cfrName: string) {
-    console.log(item);
-
-    const id = `${item.parentId ?? 'root'}#${item.id}`;
+  public async createItem(item: CFRItem) {
     const params: PutItemCommandInput = {
       TableName: this.tableName,
       Item: {
-        id: { S: id },
-        Cfr: { S: cfrName },
-        Data: {
+        parentId: { S: item.parentId ?? 'root' },
+        id: { S: item.id },
+        data: {
           S: JSON.stringify(item),
         },
-        CreateAt: { S: new Date().getTime().toString() },
-        UpdateAt: { S: new Date().getTime().toString() },
+        createdAt: { S: new Date().getTime().toString() },
+        updatedAt: { S: new Date().getTime().toString() },
       },
     };
     return this.client.send(new PutItemCommand(params));
