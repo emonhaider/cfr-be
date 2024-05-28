@@ -7,10 +7,14 @@ import { DomHandler, Element, Node, DataNode } from 'domhandler';
 import * as path from 'path';
 import { DatabaseService } from '@app/database';
 import { CFRItem } from '@app/database/model/cfr-item';
+import { FileStorageService } from '@app/file-storage';
 
 @Injectable()
 export class CFRProcessService {
-  constructor(private databaseService: DatabaseService) {}
+  constructor(
+    private databaseService: DatabaseService,
+    private fileStorageService: FileStorageService,
+  ) {}
 
   public async process() {
     const html = await this.getHtml();
@@ -22,6 +26,7 @@ export class CFRProcessService {
         console.log(JSON.stringify(json));
         console.log('Done');
         await this.writeToDatabase(json);
+        await this.saveFile(json);
       }
     });
 
@@ -32,6 +37,10 @@ export class CFRProcessService {
 
   async writeToDatabase(json: CFRItem[]) {
     await this.databaseService.createItem(json[0], 'Title49');
+  }
+
+  async saveFile(json: CFRItem[]) {
+    return this.fileStorageService.uploadFile(JSON.stringify(json), new Date().getTime().toString());
   }
 
   private async getHtml() {
