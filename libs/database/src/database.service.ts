@@ -13,8 +13,7 @@ export class DatabaseService {
 
   public async createItem(item: CFRItem, cfrName: string) {
     console.log(item);
-    // we only need to store top level data, no children
-    delete item.children;
+
     const id = `${item.parentId ?? 'root'}#${item.id}`;
     const params: PutItemCommandInput = {
       TableName: this.tableName,
@@ -28,7 +27,6 @@ export class DatabaseService {
         UpdateAt: { S: new Date().getTime().toString() },
       },
     };
-    console.log('Creating database entry');
     return this.client.send(new PutItemCommand(params));
   }
 }

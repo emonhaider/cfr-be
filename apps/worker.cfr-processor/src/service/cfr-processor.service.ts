@@ -36,11 +36,21 @@ export class CFRProcessService {
   }
 
   async writeToDatabase(json: CFRItem[]) {
-    await this.databaseService.createItem(json[0], 'Title49');
+    for (const item of json) {
+      console.log('Setting up for database entry');
+      await this.databaseService.createItem({ ...item, children: null }, 'Title49');
+      console.log('Sucessfully wrote to database');
+      if (!item.children || item.children.length === 0) continue;
+      console.log('Processing children');
+      await this.writeToDatabase(item.children);
+    }
   }
 
   async saveFile(json: CFRItem[]) {
-    return this.fileStorageService.uploadFile(JSON.stringify(json), new Date().getTime().toString());
+    console.log('Saving file');
+    const fileName = new Date().getTime().toString();
+    await this.fileStorageService.uploadFile(JSON.stringify(json), fileName);
+    console.log(`File saved. Filename: ${fileName}`);
   }
 
   private async getHtml() {
