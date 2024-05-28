@@ -45,6 +45,12 @@ $ npm run start:dev
 $ npm run start:prod
 ```
 
+### Run CFR-Processor
+
+```bash
+nest start worker.cfr-processor
+```
+
 ## Test
 
 ```bash

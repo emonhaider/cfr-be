@@ -1,10 +1,10 @@
-interface CFRItemDto {
+export interface CFRItem {
   id: string;
   parentId: string | null;
   type: string;
   name?: string;
   attribs?: { [key: string]: string };
-  children?: CFRItemDto[] | null | undefined;
+  children?: CFRItem[] | null | undefined;
   data?: string;
   ignore: boolean;
 }
