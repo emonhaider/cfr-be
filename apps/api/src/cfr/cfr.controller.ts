@@ -1,9 +1,12 @@
-import { Controller } from '@nestjs/common';
+import { Controller, Get, Param, Query } from '@nestjs/common';
 import { CfrService } from './cfr.service';
 
-@Controller('cfr')
+@Controller('')
 export class CfrController {
   constructor(private readonly cfrService: CfrService) {}
 
-  // get cfr by id
+  @Get('cfr')
+  async findAll(@Query('parentId') parentId: string) {
+    return this.cfrService.findAll(parentId);
+  }
 }
