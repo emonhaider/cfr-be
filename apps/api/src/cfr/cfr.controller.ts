@@ -1,4 +1,4 @@
-import { Controller, Get, Param, Query } from '@nestjs/common';
+import { Controller, Get, Query } from '@nestjs/common';
 import { CfrService } from './cfr.service';
 
 @Controller('')
@@ -8,5 +8,10 @@ export class CfrController {
   @Get('cfr')
   async findAll(@Query('parentId') parentId: string) {
     return this.cfrService.findAll(parentId);
+  }
+
+  @Get('cfr/actions/get-download-signed-url')
+  async getDownloadSignedUrl() {
+    return this.cfrService.getFileDownloadSignedUrl();
   }
 }
