@@ -5,8 +5,8 @@ import { ApiService } from './api.service';
 export class ApiController {
   constructor(private readonly apiService: ApiService) {}
 
-  @Get()
-  getHello(): string {
-    return this.apiService.getHello();
+  @Get('health-check')
+  getHello(): { status: string } {
+    return this.apiService.getHealthStatus();
   }
 }
