@@ -13,6 +13,7 @@ export class InfraStack extends cdk.Stack {
     // This table was created manually, therefore we are importing here
     const dynamodbTable = Table.fromTableName(this, 'dynamo', 'CFR');
 
+    // This bucket was created manually, therefore we are importing here
     const bucket = Bucket.fromBucketName(this, 'imported-bucket', 'mancomm-exercise');
 
     const layer = new LayerVersion(this, 'cfr-layer', {
