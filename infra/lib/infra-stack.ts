@@ -11,7 +11,7 @@ export class InfraStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
     // This table was created manually, therefore we are importing here
-    const dynamodbTable = Table.fromTableName(this, 'CFR', 'dynamo');
+    const dynamodbTable = Table.fromTableName(this, 'dynamo', 'CFR');
 
     const bucket = Bucket.fromBucketName(this, 'imported-bucket', 'mancomm-exercise');
 
