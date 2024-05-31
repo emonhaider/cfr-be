@@ -19,6 +19,15 @@
         "tsConfigPath": "apps/api/tsconfig.app.json"
       }
     },
+    "api-lambda": {
+      "type": "application",
+      "root": "apps/api",
+      "entryFile": "lambda",
+      "sourceRoot": "apps/api/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/api/tsconfig.app.json"
+      }
+    },
     "worker.cfr-processor": {
       "type": "application",
       "root": "apps/worker.cfr-processor",
